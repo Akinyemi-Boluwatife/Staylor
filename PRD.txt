@@ -1,0 +1,169 @@
+Product Requirements Document (PRD)
+Project Name: ParkEase Management System Version: 1.0 Date: December 5, 2025 Status: Draft
+
+1. Executive Summary
+The goal is to build a web-based Vehicle Parking Management System using React. The system will manage a facility with 50+ parking slots. It serves two distinct user bases: Admins (who manage the facility, view statistics, and configure settings) and Customers (who rent slots, manage their profiles, and park their vehicles). The application prioritizes visual data representation (dashboards/tables) and ease of rental management.
+
+2. User Roles and Personas
+2.1. Admin
+Description: The facility manager.
+
+Permissions: Full access to all data, dashboards, financial statistics, global settings, and slot management.
+
+2.2. Customer
+Description: An individual looking to rent a parking space.
+
+Permissions: Restricted access. Can only view their own booking status, update their personal profile/car details, and cancel their specific rentals.
+
+3. Functional Requirements
+3.1. Authentication & Onboarding
+Requirement: Users (Admin and Customer) must authenticate to access the dashboard.
+
+Registration Flow: Account creation occurs outside the main app flow (e.g., a landing page or pre-registration portal). The web app strictly handles Login.
+
+Login: Secure login using Email and Password.
+
+3.2. User Profile & Settings
+Edit Profile: Both Admins and Customers can edit their personal details.
+
+Avatar: Users can upload a profile picture (Avatar).
+
+Car Details: Users can upload a photo of their car for security verification.
+
+Security: Users can update their Full Name and Password.
+
+3.3. Dashboard (Landing Page)
+The initial view depends on the user role.
+
+A. Admin Dashboard:
+
+Date Filters: Ability to toggle data views for the last 7, 30, or 90 days.
+
+Key Performance Indicators (KPIs):
+
+Total Sales.
+
+Total Check-ins.
+
+Occupancy Rate.
+
+Activity Feed: A list of customers checking in and checking out specifically on the current day.
+
+Visualizations (Charts):
+
+Sales Chart: A stacked area or bar chart showing "Total Sales" vs. "Discount Sales" (Sales made with applied discounts).
+
+Stay Duration Chart: A histogram or distribution chart showing how long customers typically stay (an important business metric).
+
+B. Customer Dashboard:
+
+Active Booking: A prominent display of their current active rental (Slot number, remaining time, status).
+
+3.4. Parking Slot Management (Inventory)
+View: Table view accessible to Admin.
+
+Data Columns:
+
+Slot Name.
+
+Slot Number (1–50+).
+
+Price (Standard rate).
+
+Current Discount (if any).
+
+Status (Occupied/Empty).
+
+3.5. Booking & Rental Management
+Rentals Table: A comprehensive table view of all bookings.
+
+Columns:
+
+Customer Info (Name + Profile Details).
+
+Parking Slot Number.
+
+Arrival Date & Time.
+
+Departure Date & Time.
+
+Status Tag.
+
+Amount Paid.
+
+Booking Statuses:
+
+Unconfirmed: Rented/paid, but the car has not arrived yet.
+
+Checked-in: The car is currently in the slot.
+
+Checked-out: The car has left, and the booking is complete.
+
+Cancellation Logic:
+
+Manual: Users can cancel a slot rental manually if they leave early.
+
+Automatic: The system must automatically mark a slot as "Free" or "Checked-out" once the paid duration (time expiry) is reached.
+
+3.6. Customer Data Management
+Data Structure: Every customer record must contain:
+
+Full Name.
+
+Gender.
+
+Email Address.
+
+National ID Number.
+
+Nationality.
+
+Visual Identifier: A country flag icon corresponding to their nationality for quick identification.
+
+3.7. Application Wide Settings (Admin Only)
+Pricing: Admin can set the global base price for parking slots.
+
+Constraints: Admin can define:
+
+Minimum nights per booking.
+
+Maximum nights per booking.
+
+4. Non-Functional Requirements (UI/UX)
+4.1. Design System
+Theme: The application must support a toggleable Dark Mode.
+
+Layout: Responsive design (Desktop first, but mobile-friendly for customers checking statuses).
+
+4.2. Performance
+Tables must handle 50+ slots and hundreds of historical bookings without lag (Pagination required for the Bookings table).
+
+5. Suggested Tech Stack
+Frontend: React.js (Vite or Next.js).
+
+Styling: Tailwind CSS (Best for handling Dark Mode and responsive tables).
+
+State Management: React Query (TanStack Query) for fetching remote data (bookings/slots).
+
+Charts: Recharts or Chart.js (For the Sales and Duration statistics).
+
+Icons: React Icons (For UI elements) + flag-icon-css or similar for the Country Flags.
+
+Form Handling: React Hook Form.
+
+6. Data Model Overview (Simplified)
+User Table
+
+ID, Email, Password (Hashed), Role (Admin/Customer), AvatarURL, CarPhotoURL, NationalID, Nationality.
+
+Slot Table
+
+ID, SlotNumber, BasePrice, Discount, IsOccupied.
+
+Booking Table
+
+ID, UserID, SlotID, StartDate, EndDate, TotalPrice, Status (Unconfirmed, Checked-in, Checked-out).
+
+Settings Table
+
+MinBookingLength, MaxBookingLength, GlobalSlotPrice.
