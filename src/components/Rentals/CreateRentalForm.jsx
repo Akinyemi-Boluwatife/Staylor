@@ -13,8 +13,6 @@ import { useParkingSlots } from "../Parking-Slots/useParkingSlots";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Loader from "../ui/Loader";
-import { useUserManagement } from "../../features/user-management/useUserManagement";
-import { useUser } from "../../features/authentication/useUser";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import LittleSpinner from "../ui/LittleSpinner";
 import { useCreateRental } from "./useCreateRental";
@@ -27,15 +25,7 @@ function CreateRentalForm() {
   const preSelectedSlotId = searchParams.get("slotId").toString() || "";
   const navigate = useNavigate();
 
-  const {
-    userInfo,
-    userData,
-    isLoading: isLoadingUserInfo,
-    isError: isErrorUserInfo,
-    error: errorUserInfo,
-    isAuthenticated,
-  } = useCurrentUser();
-  // console.log(userInfo);
+  const { userInfo, isLoading: isLoadingUserInfo } = useCurrentUser();
 
   const {
     register,
@@ -49,7 +39,6 @@ function CreateRentalForm() {
   });
 
   function onSubmit(data) {
-    console.log(data);
     createRental(data);
   }
 
@@ -149,7 +138,7 @@ function CreateRentalForm() {
               type="button"
               variant="outline"
               onClick={() => navigate(-1)}
-              // disabled={isCreating}
+              disabled={isCreatingRental}
             >
               Cancel
             </Button>

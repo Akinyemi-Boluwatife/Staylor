@@ -18,15 +18,16 @@ import {
 export function ParkingSlotsActions({ slotId, isAvailable }) {
   const navigate = useNavigate();
 
+  if (!isAvailable)
+    return (
+      <Badge variant="secondary" className="hidden sm:inline-flex">
+        Currently Rented
+      </Badge>
+    );
+
   return (
     <>
       <div className="flex items-center gap-2">
-        {!isAvailable && (
-          <Badge variant="secondary" className="hidden sm:inline-flex">
-            Currently Rented
-          </Badge>
-        )}
-
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" aria-label="Open menu" size="icon-sm">
@@ -36,19 +37,11 @@ export function ParkingSlotsActions({ slotId, isAvailable }) {
           <DropdownMenuContent className="w-48" align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuGroup>
-              {isAvailable ? (
-                <DropdownMenuItem
-                  onSelect={() => navigate(`/rentals/new?slotId=${slotId}`)}
-                >
-                  Create Rental
-                </DropdownMenuItem>
-              ) : (
-                <DropdownMenuItem
-                // onSelect={() => navigate(`/rentals/${rentalId}`)} //Work on this later
-                >
-                  View Rental Details
-                </DropdownMenuItem>
-              )}
+              <DropdownMenuItem
+                onSelect={() => navigate(`/rentals/new?slotId=${slotId}`)}
+              >
+                Create Rental
+              </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

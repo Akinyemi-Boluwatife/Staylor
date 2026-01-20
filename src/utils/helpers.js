@@ -1,4 +1,7 @@
 import { formatDistance, parseISO, differenceInDays, format } from "date-fns";
+import "flag-icons/css/flag-icons.min.css";
+import countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json";
 
 //To get the distance from now
 export const formatDistanceToNow = (dateStr) =>
@@ -54,3 +57,10 @@ export function getInitials(name) {
     .toUpperCase()
     .slice(0, 2);
 }
+
+countries.registerLocale(enLocale);
+export const getFlagClass = (countryName) => {
+  if (!countryName) return "";
+  const code = countries.getAlpha2Code(countryName, "en");
+  return code ? `fi fi-${code.toLowerCase()}` : "";
+};

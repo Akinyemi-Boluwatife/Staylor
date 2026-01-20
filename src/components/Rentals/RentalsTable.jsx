@@ -30,7 +30,6 @@ import { useRentals } from "./useRentals";
 
 function RentalsTable() {
   const { rentals, isLoading, error } = useRentals();
-  console.log(rentals);
 
   if (isLoading) return <Loader />;
 

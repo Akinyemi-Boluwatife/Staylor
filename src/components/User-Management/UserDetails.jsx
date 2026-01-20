@@ -1,13 +1,6 @@
 import { useState } from "react";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -40,34 +33,23 @@ import { useUser } from "../../features/authentication/useUser";
 import { useUserManagement } from "../../features/user-management/useUserManagement";
 import Loader from "../ui/Loader";
 import ErrorMessage from "../ui/ErrorMessage";
-import { formatDate, formatDistanceToNow } from "../../utils/helpers";
+import {
+  formatDate,
+  formatDistanceToNow,
+  getFlagClass,
+} from "../../utils/helpers";
 
 function UserDetails() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { logout, isLoading: isLoadingLogout } = useLogout();
 
   const { user: userData } = useUser();
-  console.log(userData?.id);
+
   const {
     user: userInfo,
     isLoading: isLoadingUserInfo,
     error: errorUserInfo,
   } = useUserManagement(userData?.id);
-  console.log(userInfo);
-
-  // Mock user data
-  const user = {
-    fullname: "Alex Johnson",
-    email: "alex.johnson@example.com",
-    role: "Admin", // or "Customer"
-    gender: "Male",
-    nationalId: "948302-58193",
-    nationality: "United States",
-    countryCode: "us", // for flag
-    avatarUrl: "https://github.com/shadcn.png",
-    vehicleModel: "Tesla Model S Plaid",
-    joinDate: "January 15, 2024",
-  };
 
   if (isLoadingUserInfo) return <Loader />;
 
@@ -85,6 +67,20 @@ function UserDetails() {
     vehicleModel,
     createdAt,
   } = userInfo;
+
+  // // Mock user data
+  // const user = {
+  //   fullname: "Alex Johnson",
+  //   email: "alex.johnson@example.com",
+  //   role: "Admin", // or "Customer"
+  //   gender: "Male",
+  //   nationalId: "948302-58193",
+  //   nationality: "United States",
+  //   countryCode: "us", // for flag
+  //   avatarUrl: "https://github.com/shadcn.png",
+  //   vehicleModel: "Tesla Model S Plaid",
+  //   joinDate: "January 15, 2024",
+  // };
 
   return (
     <div className="flex h-full w-full flex-col space-y-8 bg-muted/10 p-6 duration-500 md:p-8">
@@ -174,15 +170,14 @@ function UserDetails() {
             <Card className="flex flex-col border bg-card/50 backdrop-blur-sm">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold">
-                  <Flag className="h-5 w-5 text-blue-500" />
+                  <Flag className="h-5 w-5 text-green-500" />
                   Nationality
                 </CardTitle>
-                {countryCode && (
-                  <img
-                    src={`https://flagcdn.com/w80/${countryCode}.png`}
-                    alt={nationality}
-                    className="h-4 w-6 opacity-80"
-                  />
+                {nationality && (
+                  <span
+                    className={getFlagClass(nationality)}
+                    style={{ fontSize: "18px" }}
+                  ></span>
                 )}
               </CardHeader>
               <CardContent className="flex flex-col gap-1 pt-2">
@@ -214,7 +209,7 @@ function UserDetails() {
             <Card className="flex flex-col border bg-card/50 backdrop-blur-sm">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold">
-                  <User className="h-5 w-5 text-pink-500" />
+                  <User className="h-5 w-5 text-blue-500" />
                   Gender
                 </CardTitle>
               </CardHeader>
@@ -229,15 +224,9 @@ function UserDetails() {
             <Card className="flex flex-col border bg-card/50 backdrop-blur-sm">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold text-foreground">
-                  <Car className="h-5 w-5 text-yellow-500" />
+                  <Car className="h-5 w-5 text-black" />
                   Vehicle
                 </CardTitle>
-                <Badge
-                  variant="secondary"
-                  className="border-0 bg-secondary/50 hover:bg-secondary/70"
-                >
-                  Primary
-                </Badge>
               </CardHeader>
               <CardContent className="mt-auto flex flex-col gap-1 pt-2">
                 <span className="text-2xl font-bold tracking-wide">

@@ -10,18 +10,6 @@ import EmptyData from "../EmptyData";
 function ParkingSlotsGrid() {
   const { parkingSlots, isPending, isError, error } = useParkingSlots();
 
-  // Mock data
-  // const parkingSlots1 = [
-  //   {
-  //     slotNumber: "A-01",
-  //     slotName: "A-Group",
-  //     totalAmount: "$250.00",
-  //     discount: "$50.00",
-  //     status: "active",
-  //     description: "Premium spot near the main entrance.",
-  //   },
-  // ];
-
   if (isPending) {
     return (
       <div className="">
@@ -67,10 +55,13 @@ function ParkingSlotsGrid() {
                     {slot.slotNumber}
                   </span>
                 </div>
-                <ParkingSlotsActions
-                  slotId={slot.id}
-                  isAvailable={slot.isActive}
-                />
+
+                {
+                  <ParkingSlotsActions
+                    slotId={slot.id}
+                    isAvailable={slot.isActive}
+                  />
+                }
               </div>
 
               <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">

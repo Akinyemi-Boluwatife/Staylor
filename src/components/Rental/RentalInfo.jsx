@@ -15,7 +15,6 @@ import ErrorMessage from "../ui/ErrorMessage";
 function RentalInfo() {
   const { rentalId } = useParams();
   const { rental, isLoading, error } = useRental(rentalId);
-  console.log(rental);
   const goBack = useGoBack();
 
   if (isLoading) return <Loader />;
