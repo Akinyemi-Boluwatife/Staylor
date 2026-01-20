@@ -1,7 +1,7 @@
 import { CircleAlert, X } from "lucide-react";
 import { Button } from "../ui/button";
 
-function ParkingAlert() {
+function RentalsAlert() {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-2.5 rounded-2xl bg-destructive p-3.5">
       <div className="flex w-full items-center justify-between px-4">
@@ -30,4 +30,4 @@ function ParkingAlert() {
   );
 }
 
-export default ParkingAlert;
+export default RentalsAlert;

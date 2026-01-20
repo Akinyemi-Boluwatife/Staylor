@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Dashboard from "./pages/Dashboard";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -13,9 +14,12 @@ import PageNotFound from "./pages/PageNotFound";
 import ParkingStatus from "./pages/ParkingStatus";
 import UserManagement from "./pages/UserManagement";
 import Parking from "./pages/Rental";
+import CreateRental from "./pages/CreateRental";
 import Rentals from "./pages/Rentals";
 import Rental from "./pages/Rental";
 import ParkingSlots from "./pages/ParkingSlots";
+import ProtectedRoute from "./components/ProtectedRoute";
+import CreateAccountForm from "./features/authentication/CreateAccountForm";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,12 +38,19 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <Routes>
-              <Route element={<AppLayout />}>
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
                 <Route index element={<Navigate replace to="dashboard" />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="Parking-slots" element={<ParkingSlots />} />
                 <Route path="Rentals" element={<Rentals />} />
-                <Route path="Rentals/:parkingId" element={<Rental />} />
+                <Route path="Rentals/new" element={<CreateRental />} />
+                <Route path="Rentals/:rentalId" element={<Rental />} />
                 <Route path="parking-status" element={<ParkingStatus />} />
                 <Route path="user-management" element={<UserManagement />} />
                 <Route path="Profile-settings" element={<ProfileSettings />} />
@@ -48,9 +59,11 @@ function App() {
                   element={<FacilitiesManagement />}
                 />
                 <Route path="contact-us" element={<ContactUs />} />
-                <Route path="login" element={<Login />} />
-                <Route path="*" element={<PageNotFound />} />
               </Route>
+
+              <Route path="create-account" element={<CreateAccountForm />} />
+              <Route path="login" element={<Login />} />
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
           </BrowserRouter>
 
@@ -63,6 +76,8 @@ function App() {
             rtl={false}
             theme="dark"
           />
+
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeProvider>
     </>

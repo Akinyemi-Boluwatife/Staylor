@@ -1,4 +1,19 @@
-import { formatDistance, parseISO, differenceInDays } from "date-fns";
+import { formatDistance, parseISO, differenceInDays, format } from "date-fns";
+
+//To get the distance from now
+export const formatDistanceToNow = (dateStr) =>
+  formatDistance(parseISO(dateStr), new Date(), {
+    addSuffix: true,
+  })
+    .replace("about ", "")
+    .replace("in", "In");
+
+//The time format that I will be using in the app
+export const formatTime = (dateStr) => format(parseISO(dateStr), "h:mm a");
+
+//The date format that I will be using in the app
+export const formatDate = (dateStr) =>
+  format(parseISO(dateStr), "dd MMM, yyyy");
 
 // We want to make this function work for both Date objects and strings (which come from Supabase)
 export const subtractDates = (dateStr1, dateStr2) =>
@@ -25,5 +40,17 @@ export const getToday = function (options = {}) {
 
 export const formatCurrency = (value) =>
   new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(
-    value
+    value,
   );
+
+//Get the first two letters of the name
+export function getInitials(name) {
+  if (!name) return "NM";
+
+  return name
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}

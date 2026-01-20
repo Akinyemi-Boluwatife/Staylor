@@ -1,13 +1,13 @@
-import ParkingAlert from "../components/Parkings/ParkingAlert";
-import ParkingsTableFilter from "../components/Parkings/RentalsTableFilter";
-import RentalsTable from "../components/Parkings/RentalsTable";
+import RentalsTable from "../components/Rentals/RentalsTable";
+import RentalsAlert from "../components/Rentals/RentalsAlert";
+import RentalsTableFilter from "../components/Rentals/RentalsTableFilter";
 
 function Rentals() {
   return (
     <div className="">
-      <div className="text-2xl/relaxed font-semibold">Rentals</div>
-      <ParkingAlert />
-      <ParkingsTableFilter />
+      <div className="text-3xl/relaxed font-bold">Rentals</div>
+      <RentalsAlert />
+      <RentalsTableFilter />
       <RentalsTable />
     </div>
   );

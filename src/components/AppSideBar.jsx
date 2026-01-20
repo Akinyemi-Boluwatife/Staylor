@@ -36,7 +36,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 
 const items = [
   {
@@ -50,20 +50,26 @@ const items = [
     icon: <CircleParking />,
   },
   {
-    title: "Rental Detail",
-    to: "Rentals/123",
-    icon: <CircleParking />,
-  },
-  {
     title: "Parking Slots",
     to: "parking-Slots",
     icon: <SquareParking />,
+  },
+  {
+    title: "User Management",
+    to: "user-management",
+    icon: <Users />,
   },
   {
     title: "Contact Us",
     to: "contact-us",
     icon: <Headset />,
   },
+
+  // {
+  //   title: "Rental Detail",
+  //   to: "Rentals/123",
+  //   icon: <CircleParking />,
+  // },
   //   {
   //     title: "User Management",
 
@@ -82,6 +88,8 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const location = useLocation();
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -93,21 +101,26 @@ export function AppSidebar() {
         {/* <Separator /> */}
 
         <SidebarGroup>
-          {/* <SidebarGroupLabel>Application</SidebarGroupLabel>
-           */}
-
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <NavLink to={item.to}>
-                      <span className="">{item.icon}</span>
-                      <span>{item.title}</span>
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {items.map((item) => {
+                const isAbsolute = item.to.startsWith("/");
+                const pathToCheck = isAbsolute ? item.to : `/${item.to}`;
+                const isActive =
+                  location.pathname === pathToCheck ||
+                  location.pathname.startsWith(`${pathToCheck}/`);
+
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild isActive={isActive}>
+                      <NavLink to={item.to}>
+                        <span className="">{item.icon}</span>
+                        <span>{item.title}</span>
+                      </NavLink>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router";
 import { MoreHorizontalIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -14,9 +15,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function ParkingsAction() {
-  const [showNewDialog, setShowNewDialog] = useState(false);
-  const [showShareDialog, setShowShareDialog] = useState(false);
+export function RentalsAction({ rentalId }) {
+  const navigate = useNavigate();
+
+  function handleNavigateToRentalPage() {
+    navigate(`/Rentals/${rentalId}`);
+  }
 
   return (
     <>
@@ -27,17 +31,11 @@ export function ParkingsAction() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40" align="end">
-          <DropdownMenuLabel>File Actions</DropdownMenuLabel>
+          {/* <DropdownMenuLabel>File Actions</DropdownMenuLabel> */}
           <DropdownMenuGroup>
-            <DropdownMenuItem onSelect={() => setShowNewDialog(true)}>
-              <button onClick={() => alert("I CLICKED THIS BUTTON")}>
-                New File...
-              </button>
+            <DropdownMenuItem onSelect={handleNavigateToRentalPage}>
+              View Details
             </DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => setShowShareDialog(true)}>
-              Share...
-            </DropdownMenuItem>
-            <DropdownMenuItem disabled>Download</DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>

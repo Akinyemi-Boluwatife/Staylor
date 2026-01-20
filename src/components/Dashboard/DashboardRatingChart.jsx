@@ -29,8 +29,8 @@ const chartDatanull = [
 ];
 
 const chartData = [
-  { category: "rating", value: 97.5, fill: "var(--color-rating)" },
-  { category: "remainder", value: 2.5, fill: "var(--color-remainder)" },
+  { category: "rating", value: 75, fill: "var(--color-rating)" },
+  { category: "remainder", value: 25, fill: "var(--color-remainder)" },
 ];
 
 const chartConfig = {
@@ -79,7 +79,6 @@ function DashboardRatingChart() {
     <Card className="flex flex-col md:col-span-2">
       <CardHeader className="items-center pb-0">
         <CardTitle>Review Rating</CardTitle>
-        {/* <CardDescription>January - June 2024</CardDescription> */}
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -97,8 +96,8 @@ function DashboardRatingChart() {
               nameKey="category"
               innerRadius={60}
               strokeWidth={2}
-              stroke="#e2e8f0" // Added a light border so the white slice is visible
-              startAngle={90} // Start at the top
+              stroke="#e2e8f0"
+              startAngle={90}
               endAngle={450}
             >
               <Label
@@ -111,13 +110,12 @@ function DashboardRatingChart() {
                         textAnchor="middle"
                         dominantBaseline="middle"
                       >
-                        {/* The display text remains 4.75 */}
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          4.75
+                          75%
                         </tspan>
                         <tspan
                           x={viewBox.cx}
@@ -138,8 +136,8 @@ function DashboardRatingChart() {
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 space-x-0 leading-none font-medium">
           <span className="flex items-center justify-center text-green-500">
-            <ChevronsUp className="h-4 w-4" /> up by 5.2%{" "}
-          </span>{" "}
+            <ChevronsUp className="h-4 w-4" /> up by 5.2%
+          </span>
           this month
         </div>
         <div className="leading-none text-muted-foreground">

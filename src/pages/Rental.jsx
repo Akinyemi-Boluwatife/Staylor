@@ -1,5 +1,7 @@
+import RentalDetail from "../components/Rental/RentalDetail";
+
 function Rental() {
-  return <div className="">Details about a particular Rental</div>;
+  return <RentalDetail />;
 }
 
 export default Rental;

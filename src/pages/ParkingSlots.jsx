@@ -1,6 +1,12 @@
+import ParkingSlotsHeading from "../components/Parking-Slots/ParkingSlotsHeading";
+import ParkingSlotsGrid from "../components/Parking-Slots/ParkingSlotsGrid";
+
 function ParkingSlots() {
   return (
-    <div>Details about all parking slots and how to book it, parking space</div>
+    <div className="space-y-6">
+      <ParkingSlotsHeading />
+      <ParkingSlotsGrid />
+    </div>
   );
 }
 
