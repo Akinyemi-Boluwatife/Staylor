@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router";
 import {
   Select,
   SelectContent,
@@ -6,12 +7,11 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import { useSearchParams } from "react-router";
+} from "./ui/select";
 
-function SortBy() {
+function SortBy({ options = { name: "", value: "" } }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const sortBy = searchParams.get("sortBy") || "desc";
+  const sortBy = searchParams.get("sortBy") || options[0]?.value;
 
   return (
     <Select
@@ -27,8 +27,13 @@ function SortBy() {
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Sort By</SelectLabel>
-          <SelectItem value="asc">Asc</SelectItem>
-          <SelectItem value="desc">Desc</SelectItem>
+          {options.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+          {/* <SelectItem value="asc">Asc</SelectItem>
+          <SelectItem value="desc">Desc</SelectItem> */}
         </SelectGroup>
       </SelectContent>
     </Select>

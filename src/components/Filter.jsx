@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -7,19 +6,31 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
+import { useSearchParams } from "react-router";
 
 function Filter({ options }) {
-  const [selectedFilterValue, setSelectedFilterValue] = useState(30);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filterValue = searchParams.get("filter") || options[0]?.value;
+
+  function handleFilterChange(value) {
+    searchParams.set("filter", value);
+    setSearchParams(searchParams);
+  }
+  console.log(filterValue);
 
   return (
     <div className="flex items-center gap-2">
       {/* Desktop View */}
-      <div className="hidden md:flex gap-x-1.5">
+      <div className="hidden gap-x-1.5 md:flex">
         {options.map((option) => (
           <Button
-            variant={Number(selectedFilterValue) === Number(option.value) ? "default" : "outline"}
+            variant={
+              Number(filterValue) === Number(option.value)
+                ? "default"
+                : "outline"
+            }
             key={option.value}
-            onClick={() => setSelectedFilterValue(option.value)}
+            onClick={() => handleFilterChange(option.value)}
           >
             {option.label}
           </Button>
@@ -38,17 +49,19 @@ function Filter({ options }) {
             {options.map((option) => (
               <DropdownMenuItem
                 key={option.value}
-                onClick={() => setSelectedFilterValue(option.value)}
-                className={Number(selectedFilterValue) === Number(option.value) ? "bg-accent" : ""}
+                onClick={() => handleFilterChange(option.value)}
+                className={
+                  Number(filterValue) === Number(option.value)
+                    ? "bg-accent"
+                    : ""
+                }
               >
-                 {option.label}
+                {option.label}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      
-
     </div>
   );
 }
