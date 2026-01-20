@@ -1,12 +1,13 @@
 import supabase from "./supabase";
 
-export async function getRentals() {
+export async function getRentals({ sortBy = "desc" }) {
+  const ascending = sortBy === "asc";
   const { data, error } = await supabase
     .from("Rentals")
     .select(
       "*, parkingSlots(slotNumber, slotName, description), profiles(fullName)",
     )
-    .order("startTime", { ascending: false });
+    .order("createdAt", { ascending });
 
   if (error) {
     console.error(error);

@@ -1,12 +1,13 @@
 import { Filter, Plus } from "lucide-react";
 import { Button } from "../ui/button";
 import { useRentals } from "./useRentals";
+import { useSearchParams } from "react-router";
 
 function RentalsTableFilter() {
   const { rentals } = useRentals();
   const numRentals = rentals?.length || 0;
   const numBooked =
-    rentals.filter((rental) => rental?.status === "checked-in")?.length || 0;
+    rentals?.filter((rental) => rental?.status === "checked-in")?.length || 0;
 
   //Calculate the available parking slots later
   // const numAvailable =

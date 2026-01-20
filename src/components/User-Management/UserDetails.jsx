@@ -37,6 +37,7 @@ import {
   formatDate,
   formatDistanceToNow,
   getFlagClass,
+  getInitials,
 } from "../../utils/helpers";
 
 function UserDetails() {
@@ -62,7 +63,6 @@ function UserDetails() {
     gender,
     nationalId,
     nationality,
-    countryCode,
     avatarUrl,
     vehicleModel,
     createdAt,
@@ -122,12 +122,7 @@ function UserDetails() {
             <Avatar className="h-32 w-32 border-4 border-muted">
               <AvatarImage src={avatarUrl} alt={fullName} />
               <AvatarFallback className="text-2xl">
-                {fullName
-                  ? fullName
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")
-                  : ""}
+                {fullName ? getInitials(fullName) : ""}
               </AvatarFallback>
             </Avatar>
             <div className="mt-4 space-y-2 text-center">

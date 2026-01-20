@@ -4,29 +4,24 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
+  useSidebar,
 } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 import {
-  Calendar,
   ChevronUp,
   CircleParking,
   Headset,
-  HomeIcon,
   House,
-  Inbox,
-  SearchIcon,
   SettingsIcon,
   SquareParking,
-  SquareParkingIcon,
   User2,
   Users,
 } from "lucide-react";
 import {
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSubItem,
 } from "./ui/sidebar";
 // import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
 import {
@@ -35,7 +30,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Separator } from "@/components/ui/separator";
 import { NavLink, useLocation } from "react-router";
 
 const items = [
@@ -89,13 +83,29 @@ const items = [
 
 export function AppSidebar() {
   const location = useLocation();
+  const { state } = useSidebar();
 
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
       <SidebarContent>
-        <SidebarHeader className="h-12 w-full border-amber-700 py-4 text-2xl/9 font-bold">
-          <div>
+        <SidebarHeader
+          className={cn(
+            "w-full border-amber-700 font-bold transition-all duration-300",
+            state === "collapsed" ? "h-16 justify-center" : "h-45",
+          )}
+        >
+          {/* <div>
             <span className="text-primary">STAYLOR</span> INT.
+          </div> */}
+          <div className="flex items-center justify-center overflow-hidden transition-all duration-300">
+            <img
+              src="Staylorww3.png"
+              alt="staylor"
+              className={cn(
+                "transition-all duration-300",
+                state === "collapsed" ? "h-8 w-8" : "h-30 w-30",
+              )}
+            />
           </div>
         </SidebarHeader>
         {/* <Separator /> */}

@@ -3,7 +3,8 @@ import { Button } from "../ui/button";
 
 function RentalsAlert() {
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-2.5 rounded-2xl bg-destructive p-3.5">
+    //Hidden for now
+    <div className="flex hidden w-full flex-col items-center justify-center gap-2.5 rounded-2xl bg-destructive p-3.5">
       <div className="flex w-full items-center justify-between px-4">
         <p className="flex gap-2.5">
           <span>
