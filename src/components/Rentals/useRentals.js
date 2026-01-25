@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getRentals } from "../../services/ApiRentals";
 import { useSearchParams } from "react-router";
 
-export function useRentals() {
+export function useRentals(customFilterValue) {
   //Filter
   const [searchParams] = useSearchParams();
-  const filterValue = searchParams.get("filter") || 60;
+  const filterValue = customFilterValue || searchParams.get("filter") || 60;
 
   //SortBy
   const sortBy = searchParams.get("sortBy") || "desc";

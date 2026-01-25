@@ -13,25 +13,26 @@ import { useParkingSlots } from "../Parking-Slots/useParkingSlots";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Loader from "../ui/Loader";
-import { useCurrentUser } from "../../hooks/useCurrentUser";
 import LittleSpinner from "../ui/LittleSpinner";
 import { useCreateRental } from "./useCreateRental";
+import { useProfiles } from "../../features/user-management/useProfiles";
 
 function CreateRentalForm() {
+  const navigate = useNavigate();
   const { createRental, isCreatingRental } = useCreateRental();
   const { parkingSlots } = useParkingSlots();
 
   const [searchParams] = useSearchParams();
   const preSelectedSlotId = searchParams.get("slotId").toString() || "";
-  const navigate = useNavigate();
 
-  const { userInfo, isLoading: isLoadingUserInfo } = useCurrentUser();
+  const { profiles, isLoadingProfiles } = useProfiles();
 
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
+    reset,
   } = useForm({
     defaultValues: {
       slotId: preSelectedSlotId,
@@ -39,10 +40,13 @@ function CreateRentalForm() {
   });
 
   function onSubmit(data) {
-    createRental(data);
+    createRental(data, {
+      onSuccess: () => navigate("/rentals"),
+      reset,
+    });
   }
 
-  if (isLoadingUserInfo) return <Loader />;
+  if (isLoadingProfiles) return <Loader />;
 
   return (
     <Card>
@@ -87,9 +91,11 @@ function CreateRentalForm() {
                   <SelectValue placeholder="Select a guest" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value={userInfo?.id || ""}>
-                    {userInfo?.fullName || "Anonymous"}
-                  </SelectItem>
+                  {profiles?.map((profile) => (
+                    <SelectItem key={profile.id} value={profile.id.toString()}>
+                      {profile.fullName}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <input type="hidden" {...register("userId")} />

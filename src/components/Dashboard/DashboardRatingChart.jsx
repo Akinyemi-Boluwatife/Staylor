@@ -1,14 +1,16 @@
 "use client";
 
 import * as React from "react";
-import { ChevronsUp, TrendingUp } from "lucide-react";
-import { Label, Pie, PieChart } from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { useRentals } from "../Rentals/useRentals";
+import { formatCurrency } from "../../utils/helpers";
+import { eachMonthOfInterval, subMonths, format, isSameMonth } from "date-fns";
+import Loader from "../ui/Loader";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -18,134 +20,137 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-export const description = "A donut chart with text";
+export default function DashboardRatingChart() {
+  const { rentals, isLoading } = useRentals(180);
 
-const chartDatanull = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 190, fill: "var(--color-other)" },
-];
+  const chartData = React.useMemo(() => {
+    if (!rentals) return [];
 
-const chartData = [
-  { category: "rating", value: 75, fill: "var(--color-rating)" },
-  { category: "remainder", value: 25, fill: "var(--color-remainder)" },
-];
+    const today = new Date();
+    // 6 months including current month
+    const start = subMonths(today, 5);
 
-const chartConfig = {
-  rating: {
-    label: "Rating",
-    color: "var(--chart-2)", // Success Green
-  },
-  remainder: {
-    label: "Remainder",
-    color: "#efefef", // White
-  },
-};
+    const months = eachMonthOfInterval({
+      start: start,
+      end: today,
+    });
 
-const chartConfignull = {
-  visitors: {
-    label: "Visitors",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "var(--chart-1)",
-  },
-  safari: {
-    label: "Safari",
-    color: "var(--chart-2)",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "var(--chart-3)",
-  },
-  edge: {
-    label: "Edge",
-    color: "var(--chart-4)",
-  },
-  other: {
-    label: "Other",
-    color: "var(--chart-5)",
-  },
-};
+    return months.map((monthDate) => {
+      const dateStr = format(monthDate, "MMM yyyy");
 
-function DashboardRatingChart() {
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
-  }, []);
+      // Filter rentals created in this specific month
+      const monthlyRevenue = rentals.reduce((acc, rental) => {
+        const rentalDate = new Date(rental.createdAt);
+        if (isSameMonth(rentalDate, monthDate)) {
+          return acc + rental.totalAmount;
+        }
+        return acc;
+      }, 0);
+
+      return {
+        date: dateStr,
+        revenue: monthlyRevenue,
+      };
+    });
+  }, [rentals]);
+
+  const chartConfig = {
+    revenue: {
+      label: "Revenue",
+      color: "hsl(var(--primary))",
+    },
+  };
+
+  if (isLoading) return <Loader />;
 
   return (
-    <Card className="flex flex-col md:col-span-2">
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Review Rating</CardTitle>
+    <Card className="flex flex-col shadow-lg md:col-span-2">
+      <CardHeader>
+        <CardTitle className="text-xl font-bold">Rental Revenue</CardTitle>
+        <CardDescription>
+          Monthly revenue over the last 6 months
+        </CardDescription>
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
+      <CardContent className="px-2 sm:p-6">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="aspect-auto h-[250px] w-full"
         >
-          <PieChart>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+          <AreaChart
+            accessibilityLayer
+            data={chartData}
+            margin={{
+              left: 12,
+              right: 12,
+            }}
+          >
+            <CartesianGrid
+              vertical={true}
+              strokeDasharray=""
+              stroke="#e5e7eb"
+              opacity={0.8}
             />
-            <Pie
-              data={chartData}
-              dataKey="value"
-              nameKey="category"
-              innerRadius={60}
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              minTickGap={32}
+              tickFormatter={(value) => value}
+              className="text-xs text-muted-foreground"
+            />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={(value) => `$${value}`}
+              className="text-xs text-muted-foreground"
+              width={40}
+            />
+            <ChartTooltip
+              content={
+                <ChartTooltipContent
+                  className="w-[150px]"
+                  nameKey="revenue"
+                  labelFormatter={(value) => value}
+                  formatter={(value) => formatCurrency(value)}
+                />
+              }
+            />
+            <Area
+              dataKey="revenue"
+              type="step"
+              fill="url(#fillRevenue)"
+              fillOpacity={0.4}
+              stroke="var(--color-revenue)"
               strokeWidth={2}
-              stroke="#e2e8f0"
-              startAngle={90}
-              endAngle={450}
+              dot={{
+                fill: "var(--color-revenue)",
+                fillOpacity: 1,
+                r: 4,
+                strokeWidth: 0,
+              }}
+              activeDot={{
+                r: 6,
+              }}
             >
-              <Label
-                content={({ viewBox }) => {
-                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                    return (
-                      <text
-                        x={viewBox.cx}
-                        y={viewBox.cy}
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                      >
-                        <tspan
-                          x={viewBox.cx}
-                          y={viewBox.cy}
-                          className="fill-foreground text-3xl font-bold"
-                        >
-                          75%
-                        </tspan>
-                        <tspan
-                          x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
-                        >
-                          Rating
-                        </tspan>
-                      </text>
-                    );
-                  }
-                }}
-              />
-            </Pie>
-          </PieChart>
+              <defs>
+                <linearGradient id="fillRevenue" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor="var(--color-revenue)"
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor="var(--color-revenue)"
+                    stopOpacity={0.1}
+                  />
+                </linearGradient>
+              </defs>
+            </Area>
+          </AreaChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 space-x-0 leading-none font-medium">
-          <span className="flex items-center justify-center text-green-500">
-            <ChevronsUp className="h-4 w-4" /> up by 5.2%
-          </span>
-          this month
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total ratings for the last 6 months
-        </div>
-      </CardFooter>
     </Card>
   );
 }
-
-export default DashboardRatingChart;
