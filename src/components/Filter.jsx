@@ -10,7 +10,8 @@ import { useSearchParams } from "react-router";
 
 function Filter({ options }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const filterValue = searchParams.get("filter") || options[0]?.value;
+  const filterValue =
+    searchParams.get("filter") || options[options.length - 1]?.value;
 
   function handleFilterChange(value) {
     searchParams.set("filter", value);

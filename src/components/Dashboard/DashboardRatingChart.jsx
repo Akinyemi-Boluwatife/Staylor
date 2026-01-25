@@ -57,7 +57,7 @@ export default function DashboardRatingChart() {
   const chartConfig = {
     revenue: {
       label: "Revenue",
-      color: "hsl(var(--primary))",
+      color: "var(--chart-2)",
     },
   };
 
@@ -87,7 +87,7 @@ export default function DashboardRatingChart() {
             <CartesianGrid
               vertical={true}
               strokeDasharray=""
-              stroke="#e5e7eb"
+              stroke="var(--ring)"
               opacity={0.8}
             />
             <XAxis

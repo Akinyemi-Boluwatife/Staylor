@@ -1,5 +1,3 @@
-import Filter from "../Filter";
-
 function DashboardFilter() {
   return (
     <div className="flex items-center justify-between">

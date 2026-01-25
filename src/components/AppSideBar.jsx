@@ -53,27 +53,6 @@ const items = [
     to: "contact-us",
     icon: <Headset />,
   },
-
-  // {
-  //   title: "Rental Detail",
-  //   to: "Rentals/123",
-  //   icon: <CircleParking />,
-  // },
-  //   {
-  //     title: "User Management",
-
-  //     icon: <Users />,
-  //   },
-  //   {
-  //     title: "Parking Facilities Management",
-
-  //     icon: <Inbox />,
-  //   },
-  //   {
-  //     title: "Parking Status",
-
-  //     icon: <SearchIcon />,
-  //   },
 ];
 
 export function AppSidebar() {
@@ -89,21 +68,19 @@ export function AppSidebar() {
             state === "collapsed" ? "h-16 justify-center" : "h-45",
           )}
         >
-          {/* <div>
-            <span className="text-primary">STAYLOR</span> INT.
-          </div> */}
           <div className="flex items-center justify-center overflow-hidden transition-all duration-300">
-            <img
-              src="Staylorww3.png"
-              alt="staylor"
-              className={cn(
-                "transition-all duration-300",
-                state === "collapsed" ? "h-8 w-8" : "h-30 w-30",
-              )}
-            />
+            <NavLink to="/dashboard">
+              <img
+                src="Staylorww3.png"
+                alt="staylor"
+                className={cn(
+                  "transition-all duration-300",
+                  state === "collapsed" ? "h-8 w-8" : "h-30 w-30",
+                )}
+              />
+            </NavLink>
           </div>
         </SidebarHeader>
-        {/* <Separator /> */}
 
         <SidebarGroup>
           <SidebarGroupContent>

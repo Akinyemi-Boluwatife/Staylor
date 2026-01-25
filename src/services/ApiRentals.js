@@ -1,20 +1,22 @@
 import supabase from "./supabase";
 
-export async function getRentals({ sortBy = "desc", filterValue }) {
+export async function getRentals({ sortBy = "desc", filterValue, status }) {
   const ascending = sortBy === "asc";
 
-  //To get the last 30 days
   const realFilterValue = new Date();
   realFilterValue.setDate(realFilterValue.getDate() - Number(filterValue));
   const dateFilter = realFilterValue.toISOString();
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("Rentals")
-    .select(
-      "*, parkingSlots(slotNumber, slotName, description), profiles(fullName)",
-    )
+    .select("*, parkingSlots(slotNumber, slotName), profiles(fullName)")
     .gte("createdAt", dateFilter)
     .order("createdAt", { ascending });
+
+  if (status && status !== "all") {
+    query = query.eq("status", status);
+  }
+  const { data, error } = await query;
 
   if (error) {
     console.error(error);
