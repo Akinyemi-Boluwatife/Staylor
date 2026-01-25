@@ -38,8 +38,8 @@ function Header() {
               </AvatarFallback>
             </Avatar>
           ) : (
-            <Avatar onClick={() => navigate("/user-management")}>
-              <AvatarImage src={userInfo?.avatarUrl} />
+            <Avatar onClick={() => navigate("/profile-settings")}>
+              <AvatarImage src={userInfo?.avatarUrl} className="object-cover" />
               <AvatarFallback className="text-xl">
                 {userInfo?.fullName ? getInitials(userInfo?.fullName) : ""}
               </AvatarFallback>

@@ -1,5 +1,3 @@
-import { Filter, Plus } from "lucide-react";
-import { Button } from "../ui/button";
 import { useRentals } from "./useRentals";
 
 function RentalsTableFilter() {
@@ -9,10 +7,6 @@ function RentalsTableFilter() {
     rentals?.filter((rental) => rental?.status === "checked-in")?.length || 0;
   const numCheckedOut =
     rentals?.filter((rental) => rental?.status === "checked-out")?.length || 0;
-
-  //Calculate the available parking slots later
-  // const numAvailable =
-  //   rentals?.filter((rental) => rental.status === "available")?.length || 0;
 
   return (
     <div className="my-4 flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -27,21 +21,6 @@ function RentalsTableFilter() {
         <p className="px-2 py-4 whitespace-nowrap">
           Checked Out Rentals ({numCheckedOut})
         </p>
-      </div>
-
-      <div className="flex w-full gap-2 md:w-auto">
-        <Button
-          variant="secondary"
-          className="flex-1 rounded-2xl border border-ring md:flex-none"
-        >
-          <Filter className="mr-2 h-4 w-4" /> Filter
-        </Button>
-        <Button
-          variant="secondary"
-          className="flex-1 rounded-2xl border border-ring md:flex-none"
-        >
-          <Plus className="mr-2 h-4 w-4" /> Add a new room
-        </Button>
       </div>
     </div>
   );

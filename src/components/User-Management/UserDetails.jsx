@@ -66,7 +66,7 @@ function UserDetails() {
     avatarUrl,
     vehicleModel,
     createdAt,
-  } = userInfo;
+  } = userInfo || {};
 
   // // Mock user data
   // const user = {
@@ -87,10 +87,10 @@ function UserDetails() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-foreground">
-            User Profile
+            Profile Settings
           </h1>
           <p className="mt-1 text-muted-foreground">
-            Manage user details, permissions, and vehicle information.
+            Manage your profile details, permissions, and vehicle information.
           </p>
         </div>
         <div className="flex gap-2">
@@ -102,8 +102,7 @@ function UserDetails() {
               <DialogHeader>
                 <DialogTitle>Edit User Details</DialogTitle>
                 <DialogDescription>
-                  Make changes to your profile here. Click save when you&apos;re
-                  done.
+                  Make changes to your profile here.
                 </DialogDescription>
               </DialogHeader>
               <EditUserDetails onClose={() => setIsDialogOpen(false)} />
@@ -120,7 +119,7 @@ function UserDetails() {
         <Card className="relative flex h-full flex-col overflow-hidden border bg-card/50 lg:col-span-4">
           <CardHeader className="relative z-10 flex flex-col items-center pt-16 pb-8">
             <Avatar className="h-32 w-32 border-4 border-muted">
-              <AvatarImage src={avatarUrl} alt={fullName} />
+              <AvatarImage src={avatarUrl} className="object-cover" />
               <AvatarFallback className="text-2xl">
                 {fullName ? getInitials(fullName) : ""}
               </AvatarFallback>
@@ -219,7 +218,7 @@ function UserDetails() {
             <Card className="flex flex-col border bg-card/50 backdrop-blur-sm">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold text-foreground">
-                  <Car className="h-5 w-5 text-black" />
+                  <Car className="h-5 w-5 text-teal-500" />
                   Vehicle
                 </CardTitle>
               </CardHeader>

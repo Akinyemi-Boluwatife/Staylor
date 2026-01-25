@@ -21,7 +21,7 @@ export function ParkingSlotsActions({ slotId, isAvailable }) {
   if (!isAvailable)
     return (
       <Badge variant="secondary" className="hidden sm:inline-flex">
-        Currently Rented
+        Currently Unavailable
       </Badge>
     );
 

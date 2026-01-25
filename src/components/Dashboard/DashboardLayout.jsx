@@ -1,5 +1,5 @@
 import DashboardRatingChart from "./DashboardRatingChart";
-import RecentDashboardBookingList from "./RecentDashboardBookingList";
+import RecentDashboardRentalsList from "./RecentDashboardRentalsList";
 import DashboardNewRentalsStat from "./DashboardNewRentalsStat";
 import DashboardCheckInStat from "./DashboardCheckInStat";
 import DashboardCheckOutStat from "./DashboardCheckOutStat";
@@ -16,7 +16,7 @@ function DashboardLayout() {
 
       <DashboardTotalRevenueStat />
 
-      <RecentDashboardBookingList />
+      <RecentDashboardRentalsList />
       <DashboardRatingChart />
     </div>
   );

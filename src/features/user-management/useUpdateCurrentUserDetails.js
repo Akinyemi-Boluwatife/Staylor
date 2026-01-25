@@ -11,8 +11,8 @@ export function useUpdateCurrentUserDetails() {
       mutationFn: updateCurrenUserDetailsApi,
       onSuccess: (user) => {
         toast.success("Your account has been successfully updated");
-        queryClient.setQueryData(["user", user.id], user);
-        queryClient.invalidateQueries({ queryKey: ["user", user.id] });
+        queryClient.setQueryData(["CurrentUser"], user);
+        queryClient.invalidateQueries({ queryKey: ["CurrentUser"] });
       },
       onError: (err) => toast.error(err.message),
     });

@@ -49,11 +49,6 @@ const items = [
     icon: <SquareParking />,
   },
   {
-    title: "User Management",
-    to: "user-management",
-    icon: <Users />,
-  },
-  {
     title: "Contact Us",
     to: "contact-us",
     icon: <Headset />,

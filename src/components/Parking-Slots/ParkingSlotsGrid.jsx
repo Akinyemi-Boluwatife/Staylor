@@ -2,7 +2,6 @@ import { Badge } from "../ui/badge";
 import { Card, CardContent } from "../ui/card";
 import { ParkingSlotsActions } from "./ParkingSlotsActions";
 import { useParkingSlots } from "./useParkingSlots";
-import { Skeleton } from "../ui/skeleton";
 import Loader from "../ui/Loader";
 import { formatCurrency } from "../../utils/helpers";
 import EmptyData from "../EmptyData";

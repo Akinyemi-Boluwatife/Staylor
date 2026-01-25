@@ -1,19 +1,16 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Dashboard from "./pages/Dashboard";
-import { ToastContainer } from "react-toastify";
+import { Slide, ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "./components/theme-provider";
 import AppLayout from "./components/AppLayout";
 import ProfileSettings from "./pages/ProfileSettings";
-import Parkings from "./pages/Rentals";
 import ContactUs from "./pages/ContactUs";
 import FacilitiesManagement from "./pages/FacilitiesManagement";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import ParkingStatus from "./pages/ParkingStatus";
-import UserManagement from "./pages/UserManagement";
-import Parking from "./pages/Rental";
 import CreateRental from "./pages/CreateRental";
 import Rentals from "./pages/Rentals";
 import Rental from "./pages/Rental";
@@ -28,8 +25,6 @@ const queryClient = new QueryClient({
     },
   },
 });
-
-// const navigate = useNavigate();
 
 function App() {
   return (
@@ -52,7 +47,6 @@ function App() {
                 <Route path="Rentals/new" element={<CreateRental />} />
                 <Route path="Rentals/:rentalId" element={<Rental />} />
                 <Route path="parking-status" element={<ParkingStatus />} />
-                <Route path="user-management" element={<UserManagement />} />
                 <Route path="Profile-settings" element={<ProfileSettings />} />
                 <Route
                   path="facilities-management"
@@ -68,13 +62,17 @@ function App() {
           </BrowserRouter>
 
           <ToastContainer
-            position="top-center"
+            position="top-right"
             autoClose={5000}
-            hideProgressBar={true}
+            hideProgressBar
             newestOnTop={false}
             closeOnClick={false}
             rtl={false}
-            theme="dark"
+            pauseOnFocusLoss
+            draggable={false}
+            pauseOnHover
+            theme="light"
+            transition={Slide}
           />
 
           <ReactQueryDevtools initialIsOpen={false} />

@@ -79,8 +79,9 @@ function RentalsTable() {
                 <TableCell> {formatCurrency(rental.totalAmount)}</TableCell>
                 <TableCell>
                   <Badge
+                    className="uppercase"
                     variant={
-                      rental.status === "checked-in" ? "active" : "destructive"
+                      rental.status === "checked-in" ? "active" : "outline"
                     }
                   >
                     {rental.status}

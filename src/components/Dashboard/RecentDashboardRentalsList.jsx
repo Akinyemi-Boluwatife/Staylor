@@ -15,7 +15,7 @@ import {
   TableRow,
 } from "../ui/table";
 
-function RecentDashboardBookingList() {
+function RecentDashboardRentalsList() {
   const { rentals: rentalsData, isLoading, error } = useRentals();
 
   if (isLoading)
@@ -35,7 +35,7 @@ function RecentDashboardBookingList() {
   if (!rentalsData || rentalsData?.length === 0)
     return (
       <div className="rounded-(--radius) border-2 md:col-span-2">
-        <EmptyData info="Booking" />
+        <EmptyData info=" Rentals" />
       </div>
     );
 
@@ -91,4 +91,4 @@ function RecentDashboardBookingList() {
   );
 }
 
-export default RecentDashboardBookingList;
+export default RecentDashboardRentalsList;

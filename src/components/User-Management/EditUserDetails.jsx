@@ -1,7 +1,6 @@
 import { useForm, Controller } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -9,31 +8,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DialogFooter } from "@/components/ui/dialog";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { useUpdateCurrentUserDetails } from "../../features/user-management/useUpdateCurrentUserDetails";
-import LittleSpinner from "../ui/LittleSpinner";
 
 function EditUserDetails({ onClose }) {
   const { userData } = useCurrentUser();
   const { updateCurrentUserDetails, isUpdating } =
     useUpdateCurrentUserDetails();
 
-  const {
-    fullName,
-    email,
-    role,
-    gender,
-    nationalId,
-    nationality,
-    countryCode,
-    avatarUrl,
-    vehicleModel,
-    createdAt,
-  } = userData || {};
+  const { fullName, gender, nationalId, nationality, vehicleModel } =
+    userData || {};
 
   const {
-    handleSubmit,
     register,
     control,
     formState: { errors },
@@ -44,19 +30,36 @@ function EditUserDetails({ onClose }) {
       gender: gender || "",
       nationality: nationality || "",
       nationalId: nationalId || "",
-      role: role || "customer",
     },
   });
 
-  function onSubmit(data) {
-    const { fullName, vehicleModel, gender, nationality, nationalId, avatar } =
-      data;
+  function handleUpdate(eOrValue, field) {
+    const value = eOrValue?.target ? eOrValue.target.value : eOrValue;
+
+    if (!value) return;
+
+    if (field === "avatar") {
+      const file = eOrValue.target.files?.[0];
+      if (!file) return;
+
+      updateCurrentUserDetails(
+        {
+          userId: userData.id,
+          avatar: file,
+        },
+        {
+          onSuccess: () => {
+            onClose();
+          },
+        },
+      );
+      return;
+    }
 
     updateCurrentUserDetails(
       {
         userId: userData.id,
-        updates: { fullName, vehicleModel, gender, nationality, nationalId },
-        avatar: avatar?.[0],
+        updates: { [field]: value },
       },
       {
         onSuccess: () => {
@@ -67,7 +70,7 @@ function EditUserDetails({ onClose }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 py-6">
+    <form className="space-y-8 py-6">
       <div className="grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2">
         <div className="space-y-3">
           <Label htmlFor="vehicleModel" className="text-base font-medium">
@@ -81,6 +84,7 @@ function EditUserDetails({ onClose }) {
             {...register("vehicleModel", {
               // required: "Your Vehicle Model is required",
             })}
+            onBlur={(e) => handleUpdate(e, "vehicleModel")}
           />
           {errors.vehicleModel && (
             <p className="text-sm font-medium text-destructive">
@@ -101,6 +105,7 @@ function EditUserDetails({ onClose }) {
             {...register("nationality", {
               // required: "Nationality is required",
             })}
+            onBlur={(e) => handleUpdate(e, "nationality")}
           />
           {errors.nationality && (
             <p className="text-sm font-medium text-destructive">
@@ -123,41 +128,13 @@ function EditUserDetails({ onClose }) {
               "nationalId",
               // { required: "National ID is required" }
             )}
+            onBlur={(e) => handleUpdate(e, "nationalId")}
           />
           {errors.nationalId && (
             <p className="text-sm font-medium text-destructive">
               {errors.nationalId.message}
             </p>
           )}
-        </div>
-
-        <div className="space-y-3">
-          <Label htmlFor="role" className="text-base font-medium">
-            Role
-          </Label>
-          <Controller
-            name="role"
-            control={control}
-            render={({ field }) => (
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                disabled={true}
-              >
-                <SelectTrigger className="h-12 bg-muted/30 px-4 text-base md:h-14">
-                  <SelectValue placeholder="Select role" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="admin" className="py-3 text-base">
-                    Admin
-                  </SelectItem>
-                  <SelectItem value="customer" className="py-3 text-base">
-                    Customer
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            )}
-          />
         </div>
 
         <div className="space-y-3">
@@ -169,7 +146,10 @@ function EditUserDetails({ onClose }) {
             control={control}
             render={({ field }) => (
               <Select
-                onValueChange={field.onChange}
+                onValueChange={(value) => {
+                  field.onChange(value); // Updates the form internal state
+                  handleUpdate(value, "gender"); // Your immediate update function
+                }}
                 defaultValue={field.value}
                 disabled={isUpdating}
               >
@@ -186,6 +166,8 @@ function EditUserDetails({ onClose }) {
                 </SelectContent>
               </Select>
             )}
+            // onBlur={(e) => handleUpdate(e, "gender")}
+            onChange={(e) => handleUpdate(e, "gender")}
           />
         </div>
 
@@ -200,28 +182,10 @@ function EditUserDetails({ onClose }) {
             className="h-12 bg-muted/30 px-4 py-2 text-base md:h-14"
             disabled={isUpdating}
             {...register("avatar")}
+            onChange={(e) => handleUpdate(e, "avatar")}
           />
         </div>
       </div>
-
-      <DialogFooter className="mt-8 space-x-2 sm:gap-0">
-        <Button
-          variant="outline"
-          type="reset"
-          size="lg"
-          className="h-12 px-8 text-base md:h-12"
-        >
-          Cancel
-        </Button>
-        <Button
-          type="submit"
-          size="lg"
-          className="h-12 px-10 text-base md:h-12"
-          disabled={isUpdating}
-        >
-          {isUpdating ? <LittleSpinner /> : "Save Changes"}
-        </Button>
-      </DialogFooter>
     </form>
   );
 }

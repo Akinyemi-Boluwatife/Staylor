@@ -16,12 +16,11 @@ function Filter({ options }) {
     searchParams.set("filter", value);
     setSearchParams(searchParams);
   }
-  console.log(filterValue);
 
   return (
     <div className="flex items-center gap-2">
       {/* Desktop View */}
-      <div className="hidden gap-x-1.5 md:flex">
+      <div className="hidden gap-x-1.5 lg:flex">
         {options.map((option) => (
           <Button
             variant={
@@ -38,7 +37,7 @@ function Filter({ options }) {
       </div>
 
       {/* Mobile View */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon">
