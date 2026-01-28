@@ -16,10 +16,10 @@ function Header() {
 
   return (
     <header className="flex h-[60px] items-center border-b border-e-gray-400 bg-background p-2.5 sm:h-[100px] md:p-6">
-      <div className="flex h-5 w-full items-center justify-between sm:h-11">
-        <div className="flex w-[200px] items-center justify-center gap-1.5 sm:w-[400px]">
-          <SidebarTrigger />
-          <InputFile />
+      <div className="flex h-9 w-full items-center justify-between sm:h-15">
+        <div className="flex items-center justify-start gap-1.5">
+          <SidebarTrigger size="icon-lg" />
+          {/* <InputFile /> */}
         </div>
 
         <div className="flex w-[102px] items-center justify-center gap-2.5 lg:gap-[22px]">
@@ -29,13 +29,16 @@ function Header() {
             <Avatar>
               <AvatarImage alt="User" />
               <AvatarFallback>
-                <CircleUserRound />
+                <CircleUserRound className="size-6 sm:size-9" />
               </AvatarFallback>
             </Avatar>
           ) : (
-            <Avatar onClick={() => navigate("/profile-settings")}>
+            <Avatar
+              onClick={() => navigate("/profile-settings")}
+              className="size-6 sm:size-9"
+            >
               <AvatarImage src={userInfo?.avatarUrl} className="object-cover" />
-              <AvatarFallback className="text-xl">
+              <AvatarFallback className="text-xl sm:text-2xl">
                 {userInfo?.fullName ? getInitials(userInfo?.fullName) : ""}
               </AvatarFallback>
             </Avatar>

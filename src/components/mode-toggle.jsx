@@ -15,9 +15,9 @@ export function ModeToggle() {
       className="border-none"
     >
       {theme === "dark" ? (
-        <MoonStar className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+        <MoonStar className="absolute size-6 scale-0 rotate-90 transition-all sm:size-9 dark:scale-100 dark:rotate-0" />
       ) : (
-        <SunMedium className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+        <SunMedium className="absolute size-6 scale-0 rotate-90 transition-all sm:size-9 dark:scale-100 dark:rotate-0" />
       )}
     </Button>
   );
