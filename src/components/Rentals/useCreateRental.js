@@ -1,4 +1,3 @@
-// hooks/useCreateRental.js
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createRental as createRentalApi } from "../../services/ApiRentals";
 import { toast } from "react-toastify"; // Optional: for notifications
@@ -13,7 +12,6 @@ export function useCreateRental() {
   } = useMutation({
     mutationFn: createRentalApi,
     onSuccess: () => {
-      // Refresh any queries matching ['rentals'] to show the new booking
       queryClient.invalidateQueries({ queryKey: ["rentals"] });
       toast.success("Rental created successfully!");
     },

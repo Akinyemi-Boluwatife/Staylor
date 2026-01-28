@@ -1,7 +1,4 @@
-"use client";
-
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router";
+import { useNavigate } from "react-router";
 import { MoreHorizontalIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -11,7 +8,6 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -31,7 +27,6 @@ export function RentalsAction({ rentalId }) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40" align="end">
-          {/* <DropdownMenuLabel>File Actions</DropdownMenuLabel> */}
           <DropdownMenuGroup>
             <DropdownMenuItem onSelect={handleNavigateToRentalPage}>
               View Details

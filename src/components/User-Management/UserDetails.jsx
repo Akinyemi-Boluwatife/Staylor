@@ -1,11 +1,8 @@
 import { useState } from "react";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
   Mail,
   User,
@@ -13,8 +10,6 @@ import {
   Car,
   CreditCard,
   Flag,
-  MapPin,
-  MoreHorizontal,
   Calendar,
   LogOut,
 } from "lucide-react";
@@ -28,11 +23,13 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog";
+
 import EditUserDetails from "./EditUserDetails";
 import { useUser } from "../../features/authentication/useUser";
 import { useUserManagement } from "../../features/user-management/useUserManagement";
 import Loader from "../ui/Loader";
 import ErrorMessage from "../ui/ErrorMessage";
+
 import {
   formatDate,
   formatDistanceToNow,
@@ -67,20 +64,6 @@ function UserDetails() {
     vehicleModel,
     createdAt,
   } = userInfo || {};
-
-  // // Mock user data
-  // const user = {
-  //   fullname: "Alex Johnson",
-  //   email: "alex.johnson@example.com",
-  //   role: "Admin", // or "Customer"
-  //   gender: "Male",
-  //   nationalId: "948302-58193",
-  //   nationality: "United States",
-  //   countryCode: "us", // for flag
-  //   avatarUrl: "https://github.com/shadcn.png",
-  //   vehicleModel: "Tesla Model S Plaid",
-  //   joinDate: "January 15, 2024",
-  // };
 
   return (
     <div className="flex h-full w-full flex-col space-y-8 bg-muted/10 p-6 duration-500 md:p-8">

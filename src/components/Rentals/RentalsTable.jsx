@@ -9,24 +9,12 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "../ui/table";
 import { RentalsAction } from "./RentalsAction";
 import { useRentals } from "./useRentals";
-
-//  Mock data
-// const parkings = [
-//   {
-//     parkingName: "Central Plaza Garage",
-//     parkingNumber: "P001",
-//     price: "15.00",
-//     status: "checked-in",
-//     description: "Covered parking, 24/7 security. Near cinema complex.",
-//   },
-// ];
 
 function RentalsTable() {
   const { rentals, isLoading, error } = useRentals();

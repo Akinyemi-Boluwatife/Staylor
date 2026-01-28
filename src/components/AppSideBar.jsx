@@ -7,6 +7,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
+
 import {
   ChevronUp,
   CircleParking,
@@ -17,19 +18,21 @@ import {
   User2,
   Users,
 } from "lucide-react";
+
 import {
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "./ui/sidebar";
-// import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+
 import { NavLink, useLocation } from "react-router";
 
 const items = [
@@ -57,7 +60,7 @@ const items = [
 
 export function AppSidebar() {
   const location = useLocation();
-  const { state, setOpenMobile } = useSidebar();
+  const { state, setOpenMobile, isMobile } = useSidebar();
 
   return (
     <Sidebar collapsible="icon">
@@ -71,7 +74,7 @@ export function AppSidebar() {
           <div className="flex items-center justify-center overflow-hidden transition-all duration-300">
             <NavLink
               to="/dashboard"
-              onClick={() => setOpenMobile((open) => !open)} //Fix this
+              onClick={() => isMobile && setOpenMobile(false)}
             >
               <img
                 src="Staylorww3.png"
@@ -98,7 +101,10 @@ export function AppSidebar() {
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive}>
-                      <NavLink to={item.to}>
+                      <NavLink
+                        to={item.to}
+                        onClick={() => isMobile && setOpenMobile(false)}
+                      >
                         <span className="">{item.icon}</span>
                         <span>{item.title}</span>
                       </NavLink>
@@ -126,7 +132,10 @@ export function AppSidebar() {
                 className="w-[--radix-popper-anchor-width]"
               >
                 <DropdownMenuItem asChild>
-                  <NavLink to="Profile-settings">
+                  <NavLink
+                    to="Profile-settings"
+                    onClick={() => isMobile && setOpenMobile(false)}
+                  >
                     <SettingsIcon /> Settings
                   </NavLink>
                 </DropdownMenuItem>

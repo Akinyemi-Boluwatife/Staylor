@@ -1,16 +1,8 @@
-import {
-  Moon,
-  MoonIcon,
-  MoonStar,
-  Sun,
-  SunMedium,
-  SunMoon,
-} from "lucide-react";
+import { MoonStar, SunMedium } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
 import { useTheme } from "@/components/theme-provider";
-import { IconMoon2, IconSun } from "@tabler/icons-react";
 
 export function ModeToggle() {
   const { setTheme, theme } = useTheme();

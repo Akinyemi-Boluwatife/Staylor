@@ -1,11 +1,10 @@
 import Header from "./Header";
 import { Outlet } from "react-router";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "./ui/sidebar";
+import { SidebarInset, SidebarProvider } from "./ui/sidebar";
 import { AppSidebar } from "./AppSideBar";
 
 function AppLayout() {
   return (
-    // 1. Make the provider a FLEX container covering the full screen
     <SidebarProvider>
       <AppSidebar />
 

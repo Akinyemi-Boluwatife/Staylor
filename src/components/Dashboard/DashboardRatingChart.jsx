@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { useRentals } from "../Rentals/useRentals";
@@ -61,7 +59,12 @@ export default function DashboardRatingChart() {
     },
   };
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <Card className="flex h-[500px] flex-col shadow-lg md:col-span-2">
+        <Loader />
+      </Card>
+    );
 
   return (
     <Card className="flex flex-col shadow-lg md:col-span-2">

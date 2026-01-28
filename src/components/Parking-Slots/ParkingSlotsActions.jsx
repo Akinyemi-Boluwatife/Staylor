@@ -1,5 +1,3 @@
-"use client";
-
 import { MoreHorizontalIcon } from "lucide-react";
 import { useNavigate } from "react-router";
 import { Badge } from "@/components/ui/badge";

@@ -99,12 +99,3 @@ export async function updateAvatar({ avatar }) {
   if (error2) throw new Error(error2.message);
   return updatedUser;
 }
-
-// const { data, error } = await supabase
-//     .from('profiles')
-//     .update({ avatarUrl: avatarName })
-//     .eq('id', userId) // Matches the UUID primary key
-//     .select();
-
-//   if (error) throw error;
-//   return data;

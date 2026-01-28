@@ -2,6 +2,7 @@ import { formatDate, getToday } from "../../utils/helpers";
 import EmptyData from "../EmptyData";
 import { useRentals } from "../Rentals/useRentals";
 import { Badge } from "../ui/badge";
+import { Card } from "../ui/card";
 import ErrorMessage from "../ui/ErrorMessage";
 import Loader from "../ui/Loader";
 import { ScrollArea } from "../ui/scroll-area";
@@ -20,16 +21,16 @@ function RecentDashboardRentalsList() {
 
   if (isLoading)
     return (
-      <div className="rounded-(--radius) border-2 md:col-span-2">
+      <Card className="flex h-[500px] flex-col items-center justify-center shadow-lg md:col-span-2">
         <Loader />
-      </div>
+      </Card>
     );
 
   if (error)
     return (
-      <div className="rounded-(--radius) border-2 md:col-span-2">
+      <Card className="flex h-[500px] flex-col items-center justify-center shadow-lg md:col-span-2">
         <ErrorMessage message={error.message} />;
-      </div>
+      </Card>
     );
 
   if (!rentalsData || rentalsData?.length === 0)

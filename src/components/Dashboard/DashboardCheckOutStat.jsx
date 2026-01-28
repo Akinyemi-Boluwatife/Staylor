@@ -2,7 +2,6 @@ import { IconDoorExit } from "@tabler/icons-react";
 import {
   Card,
   CardAction,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,

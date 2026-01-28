@@ -6,7 +6,6 @@ import { useNavigate } from "react-router";
 import { useUser } from "../features/authentication/useUser";
 import { useUserManagement } from "../features/user-management/useUserManagement";
 import { getInitials } from "../utils/helpers";
-import Loader from "./ui/Loader";
 import { CircleUserRound } from "lucide-react";
 
 function Header() {

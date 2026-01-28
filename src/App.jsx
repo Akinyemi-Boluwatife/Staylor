@@ -7,10 +7,8 @@ import { ThemeProvider } from "./components/theme-provider";
 import AppLayout from "./components/AppLayout";
 import ProfileSettings from "./pages/ProfileSettings";
 import ContactUs from "./pages/ContactUs";
-import FacilitiesManagement from "./pages/FacilitiesManagement";
 import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
-import ParkingStatus from "./pages/ParkingStatus";
 import CreateRental from "./pages/CreateRental";
 import Rentals from "./pages/Rentals";
 import Rental from "./pages/Rental";
@@ -46,12 +44,7 @@ function App() {
                 <Route path="Rentals" element={<Rentals />} />
                 <Route path="Rentals/new" element={<CreateRental />} />
                 <Route path="Rentals/:rentalId" element={<Rental />} />
-                <Route path="parking-status" element={<ParkingStatus />} />
                 <Route path="Profile-settings" element={<ProfileSettings />} />
-                <Route
-                  path="facilities-management"
-                  element={<FacilitiesManagement />}
-                />
                 <Route path="contact-us" element={<ContactUs />} />
               </Route>
 
