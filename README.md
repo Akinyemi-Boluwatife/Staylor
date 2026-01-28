@@ -21,7 +21,7 @@ Staylor is a modern, responsive accommodation and rental management dashboard bu
 - **Frontend Framework**: [React](https://react.dev/) + [Vite](https://vitejs.dev/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components**: [Radix UI](https://www.radix-ui.com/) (foundation for accessible components)
-- **Icons**: [Lucide React](https://lucide.dev/)
+- **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
 - **State Management & Data Fetching**: [TanStack Query (React Query)](https://tanstack.com/query/latest)
 - **Forms**: [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) validation
 - **Backend & Database**: [Supabase](https://supabase.com/)
@@ -33,7 +33,7 @@ Staylor is a modern, responsive accommodation and rental management dashboard bu
 1.  **Clone the repository**
 
     ```bash
-    git clone https://github.com/yourusername/staylor.git
+    git clone https://github.com/Akinyemi-Boluwatife/staylor.git
     cd staylor
     ```
 
