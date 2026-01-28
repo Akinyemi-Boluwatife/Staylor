@@ -1,4 +1,4 @@
-import { formatDistance, parseISO, differenceInDays, format } from "date-fns";
+import { formatDistance, parseISO, format } from "date-fns";
 import "flag-icons/css/flag-icons.min.css";
 import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json";

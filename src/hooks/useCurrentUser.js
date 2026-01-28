@@ -3,11 +3,7 @@ import { useUserManagement } from "../features/user-management/useUserManagement
 
 export function useCurrentUser() {
   // 1. Get the Auth User (Session)
-  const {
-    user: userData,
-    isLoading: isLoadingAuth,
-    fetchStatus: authFetchStatus,
-  } = useUser();
+  const { user: userData, isLoading: isLoadingAuth } = useUser();
 
   // 2. Get the Database Profile (Dependent on userData.id)
   const {
