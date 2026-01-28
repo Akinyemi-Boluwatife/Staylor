@@ -71,9 +71,7 @@ function RecentDashboardRentalsList() {
                   <TableCell>
                     <Badge
                       variant={
-                        rental.status === "checked-in"
-                          ? "active"
-                          : "destructive"
+                        rental.status === "checked-in" ? "active" : "outline"
                       }
                       className="uppercase"
                     >

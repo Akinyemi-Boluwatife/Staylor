@@ -8,16 +8,21 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { ChevronsDown } from "lucide-react";
-import { Badge } from "../ui/badge";
+import { useRentals } from "../Rentals/useRentals";
 
 function DashboardCheckOutStat() {
+  const { rentals } = useRentals();
+
+  const RentalsCheckOutCount = rentals?.filter(
+    (rental) => rental?.status === "checked-out",
+  )?.length;
+
   return (
     <Card className="@container/card">
       <CardHeader>
         <CardDescription>Check Out</CardDescription>
         <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-          318
+          {RentalsCheckOutCount ? RentalsCheckOutCount : 0}
         </CardTitle>
         <CardAction>
           <div className="flex items-center justify-center rounded-full bg-secondary p-2">
@@ -26,14 +31,9 @@ function DashboardCheckOutStat() {
         </CardAction>
       </CardHeader>
       <CardFooter className="flex-col items-start gap-1.5 text-sm">
-        <div className="line-clamp-1 flex gap-2 font-medium">
-          <Badge className="text-destructive" variant="secondary">
-            <ChevronsDown className="size-4" />
-            8.07%
-          </Badge>
-          from last week
+        <div className="text-muted-foreground">
+          Rentals for the last 2 months
         </div>
-        <div className="text-muted-foreground">Rentals for the last months</div>
       </CardFooter>
     </Card>
   );

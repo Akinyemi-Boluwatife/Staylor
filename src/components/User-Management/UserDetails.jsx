@@ -84,7 +84,7 @@ function UserDetails() {
 
   return (
     <div className="flex h-full w-full flex-col space-y-8 bg-muted/10 p-6 duration-500 md:p-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-foreground">
             Profile Settings
@@ -93,6 +93,7 @@ function UserDetails() {
             Manage your profile details, permissions, and vehicle information.
           </p>
         </div>
+
         <div className="flex gap-2">
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>

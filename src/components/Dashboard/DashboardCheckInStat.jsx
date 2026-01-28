@@ -7,16 +7,21 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { ChevronsDown } from "lucide-react";
+import { useRentals } from "../Rentals/useRentals";
 
 function DashboardCheckInStat() {
+  const { rentals } = useRentals();
+
+  const RentalsCheckedInCount = rentals?.filter(
+    (rental) => rental.status === "checked-in",
+  ).length;
+
   return (
     <Card className="@container/card">
       <CardHeader>
         <CardDescription>Check in</CardDescription>
         <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-          318
+          {RentalsCheckedInCount ? RentalsCheckedInCount : 0}
         </CardTitle>
         <CardAction>
           <div className="flex items-center justify-center rounded-full bg-secondary p-2">
@@ -25,14 +30,7 @@ function DashboardCheckInStat() {
         </CardAction>
       </CardHeader>
       <CardFooter className="flex-col items-start gap-1.5 text-sm">
-        <div className="line-clamp-1 flex gap-2 font-medium">
-          <Badge className="text-destructive" variant="secondary">
-            <ChevronsDown className="size-4" />
-            8.07%
-          </Badge>
-          from last week
-        </div>
-        <div className="text-muted-foreground">Rentals for the last months</div>
+        <div className="text-muted-foreground">Current rentals checked in</div>
       </CardFooter>
     </Card>
   );

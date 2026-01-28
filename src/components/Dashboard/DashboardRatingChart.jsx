@@ -57,7 +57,7 @@ export default function DashboardRatingChart() {
   const chartConfig = {
     revenue: {
       label: "Revenue",
-      color: "var(--chart-2)",
+      color: "var(--chart-1)",
     },
   };
 

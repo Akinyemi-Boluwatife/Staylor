@@ -13,14 +13,10 @@ function Header() {
   const navigate = useNavigate();
   const { user: userData } = useUser();
 
-  const { user: userInfo, isLoading: isLoadingUserInfo } = useUserManagement(
-    userData?.id,
-  );
-
-  if (isLoadingUserInfo) return <Loader />;
+  const { user: userInfo } = useUserManagement(userData?.id);
 
   return (
-    <header className="flex h-[60px] items-center border-b border-e-gray-400 p-2.5 sm:h-[100px] md:p-6">
+    <header className="flex h-[60px] items-center border-b border-e-gray-400 bg-background p-2.5 sm:h-[100px] md:p-6">
       <div className="flex h-5 w-full items-center justify-between sm:h-11">
         <div className="flex w-[200px] items-center justify-center gap-1.5 sm:w-[400px]">
           <SidebarTrigger />

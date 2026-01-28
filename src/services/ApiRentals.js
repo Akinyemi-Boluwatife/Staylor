@@ -9,7 +9,9 @@ export async function getRentals({ sortBy = "desc", filterValue, status }) {
 
   let query = supabase
     .from("Rentals")
-    .select("*, parkingSlots(slotNumber, slotName), profiles(fullName)")
+    .select(
+      "*, parkingSlots(slotNumber, slotName, description), profiles(fullName)",
+    )
     .gte("createdAt", dateFilter)
     .order("createdAt", { ascending });
 

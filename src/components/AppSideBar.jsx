@@ -57,7 +57,7 @@ const items = [
 
 export function AppSidebar() {
   const location = useLocation();
-  const { state } = useSidebar();
+  const { state, setOpenMobile } = useSidebar();
 
   return (
     <Sidebar collapsible="icon">
@@ -69,7 +69,10 @@ export function AppSidebar() {
           )}
         >
           <div className="flex items-center justify-center overflow-hidden transition-all duration-300">
-            <NavLink to="/dashboard">
+            <NavLink
+              to="/dashboard"
+              onClick={() => setOpenMobile((open) => !open)} //Fix this
+            >
               <img
                 src="Staylorww3.png"
                 alt="staylor"
