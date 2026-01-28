@@ -66,7 +66,7 @@ function UserDetails() {
   } = userInfo || {};
 
   return (
-    <div className="flex h-full w-full flex-col space-y-8 bg-muted/10 p-6 duration-500 md:p-8">
+    <div className="flex min-h-full w-full flex-col space-y-8 bg-muted/10 p-6 duration-500 md:p-8">
       <div className="flex flex-col items-center justify-between gap-5 sm:flex-row">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-foreground">
@@ -99,8 +99,8 @@ function UserDetails() {
         </div>
       </div>
 
-      <div className="grid h-full grid-cols-1 gap-6 lg:grid-cols-12">
-        <Card className="relative flex h-full flex-col overflow-hidden border bg-card/50 lg:col-span-4">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <Card className="relative flex h-auto flex-col overflow-hidden border bg-card/50 lg:col-span-4 lg:h-full">
           <CardHeader className="relative z-10 flex flex-col items-center pt-16 pb-8">
             <Avatar className="h-32 w-32 border-4 border-muted">
               <AvatarImage src={avatarUrl} className="object-cover" />
