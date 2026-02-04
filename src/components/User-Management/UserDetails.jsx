@@ -234,7 +234,7 @@ function UserDetails() {
                     </span>
                   </span>
                   <span className="text-sm text-muted-foreground">
-                    Founding Member
+                    {role === "admin" ? "Founding Member" : "User"}
                   </span>
                 </div>
               </CardContent>
