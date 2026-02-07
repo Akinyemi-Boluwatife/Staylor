@@ -42,31 +42,17 @@ function EditUserDetails({ onClose }) {
       const file = eOrValue.target.files?.[0];
       if (!file) return;
 
-      updateCurrentUserDetails(
-        {
-          userId: userData.id,
-          avatar: file,
-        },
-        {
-          onSuccess: () => {
-            onClose();
-          },
-        },
-      );
+      updateCurrentUserDetails({
+        userId: userData.id,
+        avatar: file,
+      });
       return;
     }
 
-    updateCurrentUserDetails(
-      {
-        userId: userData.id,
-        updates: { [field]: value },
-      },
-      {
-        onSuccess: () => {
-          onClose();
-        },
-      },
-    );
+    updateCurrentUserDetails({
+      userId: userData.id,
+      updates: { [field]: value },
+    });
   }
 
   return (
