@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+
 import { useSignup } from "./useSignup";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
@@ -15,7 +15,7 @@ import LittleSpinner from "../../components/ui/LittleSpinner";
 
 function CreateAccountForm() {
   const { signup, isLoading } = useSignup();
-  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -43,18 +43,11 @@ function CreateAccountForm() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-muted/50 p-4 font-sans">
-      <div className="mb-8 flex flex-col items-center gap-2">
-        <h1 className="text-3xl font-bold">Staylor</h1>
+    <div className="flex flex-col items-center justify-center p-4 font-sans">
+      <div className="mb-8 bg-transparent text-center">
+        <h1 className="text-3xl font-bold">Create New User</h1>
         <p className="text-muted-foreground">
-          Create a new account or{" "}
-          <Button
-            variant="link"
-            className="h-auto p-0 font-semibold"
-            onClick={() => navigate("/login")}
-          >
-            log in to your account
-          </Button>
+          Add a new admin or user to the system.
         </p>
       </div>
 
@@ -157,7 +150,7 @@ function CreateAccountForm() {
           </form>
         </CardContent>
       </Card>
-    </main>
+    </div>
   );
 }
 

@@ -56,6 +56,11 @@ const items = [
     to: "contact-us",
     icon: <Headset />,
   },
+  {
+    title: "Create Account",
+    to: "create-account",
+    icon: <Users />,
+  },
 ];
 
 export function AppSidebar() {

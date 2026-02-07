@@ -46,9 +46,9 @@ function App() {
                 <Route path="Rentals/:rentalId" element={<Rental />} />
                 <Route path="Profile-settings" element={<ProfileSettings />} />
                 <Route path="contact-us" element={<ContactUs />} />
+                <Route path="create-account" element={<CreateAccountForm />} />
               </Route>
 
-              <Route path="create-account" element={<CreateAccountForm />} />
               <Route path="login" element={<Login />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
