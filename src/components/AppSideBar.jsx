@@ -16,7 +16,6 @@ import {
   SettingsIcon,
   SquareParking,
   User2,
-  Users,
 } from "lucide-react";
 
 import {
@@ -55,11 +54,6 @@ const items = [
     title: "Contact Us",
     to: "contact-us",
     icon: <Headset />,
-  },
-  {
-    title: "Create Account",
-    to: "create-account",
-    icon: <Users />,
   },
 ];
 

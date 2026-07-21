@@ -62,7 +62,7 @@ export async function createRental({ userId, slotId, startTime, endTime }) {
 
 export async function updateRental(id, updates) {
   const { data, error } = await supabase
-    .from("bookings")
+    .from("Rentals")
     .update(updates)
     .eq("id", id)
     .select()
@@ -77,7 +77,7 @@ export async function updateRental(id, updates) {
 }
 
 export async function deleteRental(id) {
-  const { data, error } = await supabase.from("bookings").delete().eq("id", id);
+  const { data, error } = await supabase.from("Rentals").delete().eq("id", id);
 
   if (error) {
     console.error(error);

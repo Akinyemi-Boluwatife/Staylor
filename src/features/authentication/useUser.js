@@ -15,6 +15,7 @@ export function useUser() {
     isLoading,
     user,
     isAuthenticated: user?.role === "authenticated",
+    isDemo: user?.app_metadata?.demo === true,
     fetchStatus,
   };
 }

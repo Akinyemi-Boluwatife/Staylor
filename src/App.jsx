@@ -14,7 +14,7 @@ import Rentals from "./pages/Rentals";
 import Rental from "./pages/Rental";
 import ParkingSlots from "./pages/ParkingSlots";
 import ProtectedRoute from "./components/ProtectedRoute";
-import CreateAccountForm from "./features/authentication/CreateAccountForm";
+import PermissionDenied from "./pages/PermissionDenied";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,7 +46,7 @@ function App() {
                 <Route path="Rentals/:rentalId" element={<Rental />} />
                 <Route path="Profile-settings" element={<ProfileSettings />} />
                 <Route path="contact-us" element={<ContactUs />} />
-                <Route path="create-account" element={<CreateAccountForm />} />
+                <Route path="create-account" element={<PermissionDenied />} />
               </Route>
 
               <Route path="login" element={<Login />} />

@@ -41,7 +41,7 @@ function UserDetails() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { logout, isLoading: isLoadingLogout } = useLogout();
 
-  const { user: userData } = useUser();
+  const { user: userData, isDemo } = useUser();
 
   const {
     user: userInfo,
@@ -73,14 +73,19 @@ function UserDetails() {
             Profile Settings
           </h1>
           <p className="mt-1 text-muted-foreground">
-            Manage your profile details, permissions, and vehicle information.
+            {isDemo
+              ? "Profile editing is disabled for the demo account."
+              : "Manage your profile details, permissions, and vehicle information."}
           </p>
         </div>
 
         <div className="flex gap-2">
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <Dialog
+            open={!isDemo && isDialogOpen}
+            onOpenChange={setIsDialogOpen}
+          >
             <DialogTrigger asChild>
-              <Button>Edit Details</Button>
+              <Button disabled={isDemo}>Edit Details</Button>
             </DialogTrigger>
             <DialogContent className="max-h-[85vh] max-w-[90%] overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] md:max-w-2xl [&::-webkit-scrollbar]:hidden">
               <DialogHeader>

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 
 import { useSignup } from "./useSignup";
+import { useUser } from "./useUser";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
@@ -15,6 +16,7 @@ import LittleSpinner from "../../components/ui/LittleSpinner";
 
 function CreateAccountForm() {
   const { signup, isLoading } = useSignup();
+  const { isDemo } = useUser();
 
   const {
     register,
@@ -41,6 +43,21 @@ function CreateAccountForm() {
       },
     );
   }
+
+  if (isDemo)
+    return (
+      <div className="flex flex-col items-center justify-center p-4 font-sans">
+        <Card className="w-full max-w-md">
+          <CardHeader className="space-y-1">
+            <CardTitle className="text-2xl font-bold">Demo account</CardTitle>
+            <CardDescription>
+              Creating new users is disabled in the demo. Sign in with a real
+              account to add users.
+            </CardDescription>
+          </CardHeader>
+        </Card>
+      </div>
+    );
 
   return (
     <div className="flex flex-col items-center justify-center p-4 font-sans">
